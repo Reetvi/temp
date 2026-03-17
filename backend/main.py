@@ -4,7 +4,6 @@ import time
 import random
 import threading
 from datetime import datetime
-from fastapi import FastAPI
 import joblib
 import numpy as np
 from fastapi import FastAPI
