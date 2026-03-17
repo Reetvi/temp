@@ -74,13 +74,6 @@ const Home = () => {
   const fetchSensorData = async () => {
     try {
       setLoading(true);
-      // Add tank_id parameter if a node is selected
-      // Map the selected node to actual tank_id used in sensor data
-      const actualTankId = selectedNode ? getActualTankId(selectedNode) : null;
-      const timeParams = getTimeRangeParams();
-
-      let url = "http://127.0.0.1:8000/sensor-data";
-
 
       const [sensorResponse, predResponse] = await Promise.all([
         axios.get(`${process.env.REACT_APP_API_URL || 'http://127.0.0.1:8000'}/sensor-data`, { headers: { 'accept': 'application/json' } }),
@@ -275,6 +268,7 @@ const Home = () => {
     }, 30000);
 
     return () => clearInterval(interval);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   // Effect to refetch sensor data when selectedNode changes
@@ -282,6 +276,7 @@ const Home = () => {
     if (selectedNode) {
       fetchSensorData();
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedNode]);
 
   // Effect to refetch sensor data when time range changes
@@ -289,6 +284,7 @@ const Home = () => {
     if (selectedTimeRange && selectedNode) {
       fetchSensorData();
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedTimeRange]);
 
   // Effect to refetch sensor data when custom dates change
@@ -296,6 +292,7 @@ const Home = () => {
     if (selectedTimeRange === 'custom' && customFromDate && customToDate && selectedNode) {
       fetchSensorData();
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [customFromDate, customToDate]);
 
   return (
